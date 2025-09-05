@@ -1,5 +1,5 @@
 name: Visionect Server v3 (All-in-One)
-version: "7.6.5-3"
+version: "7.6.5-4"
 slug: visionect_v3_allinone
 description: "Visionect Server v3 + PostgreSQL + Redis w jednym dodatku (Raspberry Pi i x86-64)"
 url: "https://docs.visionect.com/VisionectSoftwareSuite/ManagementInterface.html"
@@ -25,7 +25,6 @@ privileged:
 apparmor: false
 devices:
   - /dev/fuse
-# map usuwamy; /data jest zapewniane automatycznie przez Supervisor
 schema:
   postgres_user: str
   postgres_password: str
