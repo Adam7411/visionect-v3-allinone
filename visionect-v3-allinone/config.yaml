@@ -13,11 +13,12 @@ startup: services
 boot: auto
 init: false
 ingress: false
+
 panel_icon: mdi:tablet
 webui: "http://[HOST]:[PORT:8081]"
 watchdog: "http://[HOST]:[PORT:8081]"
 
-# KLUCZOWE: ports ustawione z domyślną mapą — pojawi się zakładka Network
+# KLUCZ: wystawiamy porty, aby w HA pojawiła się zakładka Network
 ports:
   "8081/tcp": 8081
   "11113/tcp": 11113
