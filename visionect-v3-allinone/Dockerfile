@@ -1,19 +1,16 @@
-# Budujemy dodatek bezpośrednio na obrazie Visionect per arch przez BUILD_FROM (HA ustawia to z build.yaml).
+# Budujemy na obrazie Visionect dostarczonym przez HA (BUILD_FROM z build.yaml)
 ARG BUILD_FROM
-FROM ${BUILD_FROM}
+FROM $BUILD_FROM
 
 # HA przekazuje BUILD_ARCH (amd64, aarch64, armv7)
 ARG BUILD_ARCH
 ARG S6_OVERLAY_VERSION
 
-# Używamy /bin/sh, żeby działało zarówno na Debian/Ubuntu jak i Alpine
 SHELL ["/bin/sh", "-c"]
-
-# Upewnij się, że mamy uprawnienia roota do instalacji pakietów
 USER root
 
-# Podstawowe narzędzia + PostgreSQL + Redis + bash (wymagany przez skrypty) + jq + xz + curl
-# Obsłuż Debian/Ubuntu (apt-get) i Alpine (apk)
+# Podstawowe narzędzia + PostgreSQL + Redis + bash + jq + xz + curl
+# Obsłuż zarówno Debian/Ubuntu (apt-get) jak i Alpine (apk)
 RUN if command -v apt-get >/dev/null 2>&1; then \
       apt-get update && \
       DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
@@ -28,12 +25,11 @@ RUN if command -v apt-get >/dev/null 2>&1; then \
       exit 1; \
     fi
 
-# Wyznacz architekturę s6-overlay na podstawie BUILD_ARCH
-# amd64 -> x86_64, aarch64 -> aarch64, armv7 -> armhf
+# Pobierz i zainstaluj s6-overlay wg architektury
 RUN case "${BUILD_ARCH}" in \
-      amd64)  export S6_ARCH="x86_64" ;; \
-      aarch64) export S6_ARCH="aarch64" ;; \
-      armv7) export S6_ARCH="armhf" ;; \
+      amd64)  S6_ARCH="x86_64" ;; \
+      aarch64) S6_ARCH="aarch64" ;; \
+      armv7) S6_ARCH="armhf" ;; \
       *) echo "Unsupported BUILD_ARCH: ${BUILD_ARCH}" >&2; exit 1 ;; \
     esac && \
     mkdir -p /tmp/s6 && \
@@ -51,7 +47,5 @@ RUN mkdir -p /data/pgdata /data/redis && chown -R root:root /data
 # Usługi s6 oraz skrypty init
 COPY rootfs/ /
 
-# Ustaw locale
 ENV LANG=C.UTF-8
-
-# HA uruchomi /init (s6-overlay) dzięki init: true
+# HA uruchomi /init (s6-overlay) dzięki init: true w config.yaml
