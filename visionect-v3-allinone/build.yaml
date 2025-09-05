@@ -2,5 +2,3 @@ build_from:
   amd64: "visionect/visionect-server-v3:7.6.5"
   aarch64: "visionect/visionect-server-v3:7.6.5-arm"
   armv7: "visionect/visionect-server-v3:7.6.5-arm"
-args:
-  S6_OVERLAY_VERSION: "3.1.6.2"
