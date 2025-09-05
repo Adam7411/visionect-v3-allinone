@@ -18,7 +18,7 @@ panel_icon: mdi:tablet
 webui: "http://[HOST]:[PORT:8081]"
 watchdog: "http://[HOST]:[PORT:8081]"
 
-# KLUCZ: wystawiamy porty, aby w HA pojawiła się zakładka Network
+# Wystawiamy porty – pojawi się zakładka Network
 ports:
   "8081/tcp": 8081
   "11113/tcp": 11113
