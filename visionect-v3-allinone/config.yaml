@@ -18,6 +18,7 @@ panel_icon: mdi:tablet
 webui: "http://[HOST]:[PORT:8081]"
 watchdog: "http://[HOST]:[PORT:8081]"
 
+# WYSTAW porty na hosta
 ports:
   "8081/tcp": 8081
   "11113/tcp": 11113
