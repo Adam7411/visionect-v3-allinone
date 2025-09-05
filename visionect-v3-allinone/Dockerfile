@@ -1,48 +1,21 @@
-version: "3"
-services:
-  vserver3:
-    container_name: vss
-    image: visionect/visionect-server-v3:7.6.5-arm
-    privileged: true
-    ulimits:
-      core: 0
-    depends_on:
-      - redis
-      - postgres_db
-    cap_add:
-      - MKNOD
-      - SYS_ADMIN
-    devices:
-      - "/dev/fuse:/dev/fuse"
-    restart: always
-    links:
-      - "postgres_db:postgres"
-      - "redis:redis"
-    ports:
-      - 8181:8081  # Zmiana mapowania portu
-      - 11113:11113
-    environment:
-      - DB2_1_PORT_5432_TCP_ADDR=postgres
-      - DB2_1_PORT_5432_TCP_USER=visionect
-      - DB2_1_PORT_5432_TCP_PASS=visionect
-      - DB2_1_PORT_5432_TCP_DB=koala
-      - REDIS_ADDRESS=redis:6379
-      - VISIONECT_SERVER_ADDRESS=localhost
-    volumes:
-      - /dev/shm:/dev/shm
-  postgres_db:
-    container_name: pdb
-    image: postgres:latest
-    restart: always
-    ports: 
-      - 5432:5432
-    environment:
-      - POSTGRES_USER=visionect
-      - POSTGRES_DB=koala
-      - POSTGRES_PASSWORD=visionect
-      - PGPASSWORD=visionect
-    volumes:
-      - ./pgdata:/var/lib/postgresql/data
-  redis:
-    image: redis
-    restart: always
+ARG BUILD_FROM
+FROM ${BUILD_FROM}
+
+# Instaluj dodatkowe pakiety potrzebne dla Home Assistant Add-on
+RUN apt-get update && apt-get install -y \
+    postgresql-client \
+    redis-tools \
+    s6-overlay \
+    && rm -rf /var/lib/apt/lists/*
+
+# Skopiuj skrypty startowe i konfigurację
+COPY rootfs /
+
+# Ustaw uprawnienia
+RUN chmod a+x /etc/services.d/*/run /etc/cont-init.d/*
+
+# Zdefiniuj porty
+EXPOSE 8081 11113
+
+# Użyj s6-overlay jako init system
+ENTRYPOINT ["/init"]
