@@ -1,9 +1,10 @@
 name: Visionect Server v3 (All-in-One)
-version: "7.6.5-arm-1"
+version: "7.6.5-2"
 slug: visionect_v3_allinone
-description: "Visionect Server v3 + PostgreSQL + Redis w jednym dodatku (Raspberry Pi)"
+description: "Visionect Server v3 + PostgreSQL + Redis w jednym dodatku (Raspberry Pi i x86-64)"
 url: "https://docs.visionect.com/VisionectSoftwareSuite/ManagementInterface.html"
 arch:
+  - amd64
   - aarch64
   - armv7
 startup: services
