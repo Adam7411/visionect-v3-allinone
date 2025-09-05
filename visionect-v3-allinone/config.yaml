@@ -1,5 +1,5 @@
 name: Visionect Server v3 (All-in-One)
-version: "7.6.5-8"
+version: "7.6.5-9"
 slug: visionect_v3_allinone
 description: "Visionect Server v3 + PostgreSQL + Redis w jednym dodatku (Raspberry Pi i x86-64)"
 url: "https://docs.visionect.com/VisionectSoftwareSuite/ManagementInterface.html"
@@ -11,22 +11,20 @@ arch:
 
 startup: services
 boot: auto
-# Nie używamy s6-overlay, więc init wyłączony
 init: false
 ingress: false
-
 panel_icon: mdi:tablet
 webui: "http://[HOST]:[PORT:8081]"
+watchdog: "http://[HOST]:[PORT:8081]"
 
-# Porty opcjonalne - wybierzesz w UI, unikamy konfliktów domyślne null
+# KLUCZOWE: ports ustawione z domyślną mapą — pojawi się zakładka Network
 ports:
-  "8081/tcp": null
-  "11113/tcp": null
+  "8081/tcp": 8081
+  "11113/tcp": 11113
 ports_description:
   "8081/tcp": "Visionect Management UI"
   "11113/tcp": "Visionect device port"
 
-# Wymagane dla FUSE/overlay w obrazie Visionect
 privileged:
   - SYS_ADMIN
 apparmor: false
