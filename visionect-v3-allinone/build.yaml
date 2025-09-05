@@ -1,5 +1,5 @@
 args:
-  # Obrazy Visionect per arch
+  # Obrazy Visionect per arch (podmień tag, jeśli Visionect używa innego dla amd64)
   amd64.VSS_IMAGE: "visionect/visionect-server-v3:7.6.5"
   aarch64.VSS_IMAGE: "visionect/visionect-server-v3:7.6.5-arm"
   armv7.VSS_IMAGE: "visionect/visionect-server-v3:7.6.5-arm"
