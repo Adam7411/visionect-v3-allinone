@@ -1,27 +1,48 @@
-# Bazujemy na oficjalnym obrazie Visionect per arch
-ARG BUILD_FROM
-FROM ${BUILD_FROM}
-
-USER root
-SHELL ["/bin/sh", "-c"]
-
-# Narzędzia potrzebne do entrypointa
-RUN if command -v apt-get >/dev/null 2>&1; then \
-      apt-get update && \
-      DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-        ca-certificates curl jq bash sed && \
-      rm -rf /var/lib/apt/lists/*; \
-    elif command -v apk >/dev/null 2>&1; then \
-      apk add --no-cache ca-certificates curl jq bash sed; \
-    else \
-      echo "Unsupported base image: no apt-get or apk available." >&2; \
-      exit 1; \
-    fi
-
-# Wrapper entrypoint – ustawia TIMEZONE i bind_address, potem startuje supervisord
-COPY rootfs/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
-EXPOSE 8081 11113
-
-ENTRYPOINT ["/entrypoint.sh"]
+version: "3"
+services:
+  vserver3:
+    container_name: vss
+    image: visionect/visionect-server-v3:7.6.5-arm
+    privileged: true
+    ulimits:
+      core: 0
+    depends_on:
+      - redis
+      - postgres_db
+    cap_add:
+      - MKNOD
+      - SYS_ADMIN
+    devices:
+      - "/dev/fuse:/dev/fuse"
+    restart: always
+    links:
+      - "postgres_db:postgres"
+      - "redis:redis"
+    ports:
+      - 8181:8081  # Zmiana mapowania portu
+      - 11113:11113
+    environment:
+      - DB2_1_PORT_5432_TCP_ADDR=postgres
+      - DB2_1_PORT_5432_TCP_USER=visionect
+      - DB2_1_PORT_5432_TCP_PASS=visionect
+      - DB2_1_PORT_5432_TCP_DB=koala
+      - REDIS_ADDRESS=redis:6379
+      - VISIONECT_SERVER_ADDRESS=localhost
+    volumes:
+      - /dev/shm:/dev/shm
+  postgres_db:
+    container_name: pdb
+    image: postgres:latest
+    restart: always
+    ports: 
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=visionect
+      - POSTGRES_DB=koala
+      - POSTGRES_PASSWORD=visionect
+      - PGPASSWORD=visionect
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+  redis:
+    image: redis
+    restart: always
