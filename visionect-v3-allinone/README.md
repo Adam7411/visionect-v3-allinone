@@ -1,4 +1,4 @@
-# Visionect Server v3 (All‑in‑One) — Home Assistant Add-on (Raspberry Pi)
+# Visionect Server v3 (All‑in‑One) — Home Assistant Add-on 
 
 Ten dodatek uruchamia Visionect Server v3, PostgreSQL i Redis w jednym kontenerze (armv7/aarch64).
 
