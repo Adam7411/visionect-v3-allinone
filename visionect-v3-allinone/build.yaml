@@ -1,9 +1,13 @@
 args:
-  # Obraz Visionect dla ARM. Dla aarch64 możesz wskazać tag arm64 jeśli Visionect go publikuje.
+  # Obrazy Visionect per arch
+  amd64.VSS_IMAGE: "visionect/visionect-server-v3:7.6.5"
   aarch64.VSS_IMAGE: "visionect/visionect-server-v3:7.6.5-arm"
   armv7.VSS_IMAGE: "visionect/visionect-server-v3:7.6.5-arm"
-  # Architektura s6-overlay: aarch64 lub armhf
+
+  # Architektura s6-overlay
+  amd64.S6_ARCH: "x86_64"
   aarch64.S6_ARCH: "aarch64"
   armv7.S6_ARCH: "armhf"
+
   # Wersja s6-overlay
   S6_OVERLAY_VERSION: "3.1.6.2"
