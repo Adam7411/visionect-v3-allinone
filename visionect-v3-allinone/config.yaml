@@ -1,0 +1,39 @@
+name: Visionect Server v3 (All-in-One)
+version: "7.6.5-arm-1"
+slug: visionect_v3_allinone
+description: "Visionect Server v3 + PostgreSQL + Redis w jednym dodatku (Raspberry Pi)"
+url: "https://docs.visionect.com/VisionectSoftwareSuite/ManagementInterface.html"
+arch:
+  - aarch64
+  - armv7
+startup: services
+boot: auto
+init: true
+ingress: false
+panel_icon: mdi:tablet
+webui: "http://[HOST]:[PORT:8081]"
+watchdog: "http://[HOST]:[PORT:8081]"
+ports:
+  "8081/tcp": 8081
+  "11113/tcp": 11113
+ports_description:
+  "8081/tcp": "Visionect Management UI"
+  "11113/tcp": "Visionect device port"
+privileged:
+  - SYS_ADMIN
+  - MKNOD
+apparmor: false
+devices:
+  - /dev/fuse:/dev/fuse:rwm
+map:
+  - data:rw
+schema:
+  postgres_user: str
+  postgres_password: str
+  postgres_db: str
+  visionect_server_address: str
+options:
+  postgres_user: "visionect"
+  postgres_password: "visionect"
+  postgres_db: "koala"
+  visionect_server_address: "localhost"
