@@ -3,6 +3,7 @@ FROM ${BUILD_FROM}
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Jeśli wcześniej usunąłeś instalację serwera, upewnij się że te pakiety są
 RUN apt-get update && apt-get install -y --no-install-recommends \
     postgresql postgresql-contrib \
     redis-server \
@@ -10,19 +11,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-# Utwórz użytkownika postgres jeśli obraz go nie ma (ostrożnie – jeśli istnieje, ignore)
+# Użytkownik postgres (jeżeli nie istnieje)
 RUN id postgres 2>/dev/null || useradd -r -s /bin/bash postgres
 
-# Katalogi na dane
+# Katalogi danych (mogą też powstać w run.sh, ale to nie szkodzi)
 RUN mkdir -p /data/pgdata /data/redis && chown -R postgres:postgres /data/pgdata
 
-# Skopiuj nasze skrypty
-COPY rootfs/usr/local/bin/init_pg.sh /usr/local/bin/init_pg.sh
 COPY run.sh /run.sh
-
-RUN chmod 755 /usr/local/bin/init_pg.sh /run.sh
+RUN chmod 755 /run.sh
 
 EXPOSE 8081 11113
 
-# Domyślne uruchomienie
 ENTRYPOINT ["/run.sh"]
