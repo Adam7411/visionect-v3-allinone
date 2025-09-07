@@ -3,7 +3,6 @@ set -euo pipefail
 
 OPTIONS_JSON="/data/options.json"
 
-# --- Funkcja logowania
 log() { echo "[$(date +'%H:%M:%S')] $*"; }
 
 # --- Odczyt opcji
@@ -21,24 +20,20 @@ mkdir -p /data/redis
 mkdir -p /data/pgdata
 chown -R postgres:postgres /data/pgdata
 
-# --- Redis
-log "Starting redis-server..."
+# --- Start Redis
+log "Starting redis-server ..."
 redis-server --port 6379 --dir /data/redis --save "" --appendonly no &
 REDIS_PID=$!
 
-# --- Znajdź initdb i postgres
+# --- Lokalizowanie narzędzi Postgresa
 detect_bin() {
   local name="$1"
   if command -v "$name" >/dev/null 2>&1; then
-    command -v "$name"
-    return 0
+    command -v "$name"; return 0
   fi
   local alt
   alt=$(ls /usr/lib/postgresql/*/bin/"$name" 2>/dev/null | head -n1 || true)
-  if [ -n "$alt" ]; then
-    echo "$alt"
-    return 0
-  fi
+  [ -n "$alt" ] && echo "$alt" && return 0
   return 1
 }
 
@@ -46,20 +41,8 @@ INITDB_BIN=$(detect_bin initdb || true)
 POSTGRES_BIN=$(detect_bin postgres || true)
 PSQL_BIN=$(detect_bin psql || true)
 
-if [ -z "$INITDB_BIN" ]; then
-  log "ERROR: Nie znaleziono initdb (brak pakietu serwera Postgres?)."
-  log "Zainstalowane pliki w /usr/lib/postgresql:"
-  ls -1 /usr/lib/postgresql 2>/dev/null || true
-  kill $REDIS_PID || true
-  exit 1
-fi
-if [ -z "$POSTGRES_BIN" ]; then
-  log "ERROR: Nie znaleziono postgres binarki."
-  kill $REDIS_PID || true
-  exit 1
-fi
-if [ -z "$PSQL_BIN" ]; then
-  log "ERROR: Nie znaleziono psql (klient)."
+if [ -z "$INITDB_BIN" ] || [ -z "$POSTGRES_BIN" ] || [ -z "$PSQL_BIN" ]; then
+  log "ERROR: Missing Postgres binaries (initdb=$INITDB_BIN postgres=$POSTGRES_BIN psql=$PSQL_BIN)"
   kill $REDIS_PID || true
   exit 1
 fi
@@ -79,16 +62,15 @@ else
 fi
 
 # --- Start Postgresa
-log "Starting PostgreSQL..."
+log "Starting PostgreSQL ..."
 su - postgres -c "$POSTGRES_BIN -D /data/pgdata" &
 POSTGRES_PID=$!
 
-# --- Czekaj na gotowość Postgresa
+# --- Czekanie na gotowość
 log "Waiting for PostgreSQL readiness..."
 for i in {1..60}; do
   if "$PSQL_BIN" -h 127.0.0.1 -U postgres -c "SELECT 1" >/dev/null 2>&1; then
-    READY=1
-    break
+    READY=1; break
   fi
   sleep 1
 done
@@ -99,7 +81,7 @@ if [ "${READY:-0}" != "1" ]; then
 fi
 log "PostgreSQL is ready."
 
-# --- Użytkownik i baza
+# --- Użytkownik / baza
 log "Ensuring role/database..."
 EXISTS_USER=$("$PSQL_BIN" -h 127.0.0.1 -U postgres -Atc "SELECT 1 FROM pg_roles WHERE rolname='${PG_APP_USER}';" || true)
 if [ "$EXISTS_USER" != "1" ]; then
@@ -112,7 +94,7 @@ if [ "$EXISTS_DB" != "1" ]; then
   "$PSQL_BIN" -h 127.0.0.1 -U postgres -c "CREATE DATABASE ${PG_APP_DB} OWNER ${PG_APP_USER};"
 fi
 
-# --- Zmienne Visionect
+# --- Zmienne środowiskowe dla Visionect
 export DB2_1_PORT_5432_TCP_ADDR="127.0.0.1"
 export DB2_1_PORT_5432_TCP_USER="${PG_APP_USER}"
 export DB2_1_PORT_5432_TCP_PASS="${PG_APP_PASS}"
@@ -120,31 +102,32 @@ export DB2_1_PORT_5432_TCP_DB="${PG_APP_DB}"
 export REDIS_ADDRESS="127.0.0.1:6379"
 export VISIONECT_SERVER_ADDRESS="${VSA}"
 
-# --- Szukanie Visionect binarki
-log "Launching Visionect..."
-CANDIDATES=(
-  "/docker-entrypoint.sh"
-  "/entrypoint.sh"
-  "/start.sh"
-  "/usr/local/bin/start.sh"
-  "/usr/bin/vss"
-  "/usr/local/bin/vss"
-  "/visionect-server"
-  "/app"
-)
+# --- Naprawa konfiguracji Supervisora (zamiana hostów na 127.0.0.1)
+if [ -d /etc/supervisor/conf.d ]; then
+  log "Patching supervisor conf files (postgres -> 127.0.0.1, redis -> 127.0.0.1)"
+  for f in /etc/supervisor/conf.d/*.conf; do
+    [ -f "$f" ] || continue
+    sed -i -E 's/\bpostgres\b/127.0.0.1/g; s/\bredis\b/127.0.0.1/g' "$f" || true
+  done
+  log "Supervisor conf listing:"
+  ls -1 /etc/supervisor/conf.d || true
+  log "Sample (first 40 lines) of each file:"
+  for f in /etc/supervisor/conf.d/*.conf; do
+    echo "--- $f ---"
+    head -n 40 "$f"
+  done
+else
+  log "WARNING: /etc/supervisor/conf.d not found – maybe this is not the expected Visionect base image?"
+fi
 
-for P in "${CANDIDATES[@]}"; do
-  if [ -x "$P" ]; then
-    log "Using Visionect entrypoint: $P"
-    exec "$P"
-  fi
-done
-
-log "ERROR: Visionect entrypoint not found."
-log "Root listing:"
-ls -l /
-log "/usr/local/bin listing:"
-ls -l /usr/local/bin || true
-log "Sleeping 60s for debug..."
-sleep 60
-exit 1
+# --- Start Visionect przez supervisord
+if command -v /usr/bin/supervisord >/dev/null 2>&1; then
+  log "Starting supervisord (Visionect stack)..."
+  exec /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
+else
+  log "ERROR: supervisord not found. Listing /usr/bin:"
+  ls -l /usr/bin | grep -i super || true
+  log "Falling back to debug sleep."
+  sleep 600
+  exit 1
+fi
