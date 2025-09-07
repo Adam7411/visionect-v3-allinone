@@ -77,7 +77,7 @@ Użyjemy dodatku **AppDaemon**.
 
 ---
 
-## ⭐ Integracja z Home Assistant (Odczyt stanu tabletu i wysyłanie url i własnego tekstu)
+## ⭐ Obowiazkowa integracja z Home Assistant (Odczyt stanu tabletu i wysyłanie zdjęc url i własnego tekstu)
 
 
 Integracja do odczytu w Home Assistant informacje o stanie tabletu Joan (np. poziom naładowania baterii, status połączenia itp) 
