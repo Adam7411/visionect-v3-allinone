@@ -242,4 +242,4 @@ Zgłoś Issue w repozytorium:
 - Fragmenty logów
 - Kroki odtworzenia
 
-Powodzenia z integracją Visionect w Home Assistant!
+
