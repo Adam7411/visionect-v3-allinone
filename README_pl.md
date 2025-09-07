@@ -85,7 +85,8 @@ Do wysyłania swojego adresu url z poziomu HA na Joan 6 np. ( https://www.wikipe
 (P.S plik zdjecie_test.png umieszczamy w katalogu: \192.168.xxx.xxx\config\www\) 
 Wysyłanie własnego tekstu na Joan 6 (powiadomień z HA)
 
-[Visionect Joan](https://github.com/Adam7411/visionect_joan)
+👉 [Visionect Joan](https://github.com/Adam7411/visionect_joan) 👈
+👉 [Visionect Joan](https://github.com/Adam7411/visionect_joan) 👈
 
 Pozwoli to na tworzenie automatyzacji n.p:
 
