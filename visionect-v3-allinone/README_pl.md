@@ -17,228 +17,90 @@ Przetestowano z tabletem Joan 6.
 1. Dodaj URL repozytorium jako Custom Repository w Sklepie dodatków HA.
 2. Wybierz „Visionect Server v3 (All-in-One)” → Zainstaluj.
 3. Uruchom dodatek.
-4. Otwórz UI: `http://<adres_HA>:8081`.
+4. Otwórz UI: `http://<adres_HA>:8081` uruchomi się server Visionect Software Suite
+5. Połącz Joan 6 z Visionect Software Suite 
+
+## 📲 Krok 5: Konfiguracja tabletu Visionect
+
+1.  Pobierz i uruchom aplikację **Visionect Configurator** na swoim komputerze:
+    *   **Windows:** [VisionectConfigurator.exe](https://files.visionect.com/VisionectConfigurator/VisionectConfigurator.exe) lub [joan-configurator-2.1.3-windows.exe](https://configurator.getjoan.com/download/flavor/joan/latest/windows_64) 
+    *   **Windows: wersje 1.3.10-->** [VisionectConfigurator1.3.10.exe](https://files.visionect.com/VisionectConfigurator2.exe) lub [VC_1.exe](https://files.visionect.com/VC_1.exe) gdy wyświetlacz e-ink niełączy się z nową (Hardware Revision Second generation Visionect Sign 6) niekiedy trzeba skonfigurować przez [VC_1.exe] albo v1.3.10 cierpliwie pokombinuj.
+    *   **Linux:** [VisionectConfigurator_linux.deb](https://files.visionect.com/VisionectConfigurator/VisionectConfigurator_linux.deb)
+    *   **macOS (Apple Silicon):** [VisionectConfigurator_m1.dmg](https://files.visionect.com/VisionectConfigurator/VisionectConfigurator_m1.dmg)
+    *   **macOS (Intel):** [VisionectConfigurator_intel.dmg](https://files.visionect.com/VisionectConfigurator/VisionectConfigurator_intel.dmg)
+2.  Podłącz tablet do komputera za pomocą kabla USB.
+3.  Po wykryciu tabletu przez aplikację:
+    *   Wybierz swoją sieć Wi-Fi i wpisz hasło.
+    *   Przejdź do zakładki **Advanced Connectivity**.
+    *   Wprowadź dane swojego serwera:
+        *   **Server IP**: Adres IP Twojej maszyny wirtualnej z Dockerem (np. `192.168.1.100`).
+        *   **Port**: `11113`
+     
+          Visionect Configurator wersja 2.0
+    ![image](https://github.com/user-attachments/assets/de30fd1e-9bd3-4f98-ab00-9a3b534f7332)
+
+_______________________________________________
 
 
+4.  Kliknij przycisk, aby połączyć tablet z serwerem.
+5.  Po chwili tablet powinien pojawić się w panelu **Visionect Software Suite** na liście urządzeń.
 
-## Spis treści
-
-- [Funkcje](#funkcje)
-- [Architektura](#architektura)
-- [Obsługiwane platformy](#obsługiwane-platformy)
-- [Porty](#porty)
-- [Trwałość danych](#trwałość-danych)
-- [Zawarte komponenty](#zawarte-komponenty)
-- [Instalacja](#instalacja)
-- [Konfiguracja (schema options.json)](#konfiguracja-schema-optionsjson)
-- [Healthcheck](#healthcheck)
-- [Logi](#logi)
-- [Aktualizacje](#aktualizacje)
-- [Rozwiązywanie problemów](#rozwiązywanie-problemów)
-- [Uwagi bezpieczeństwa](#uwagi-bezpieczeństwa)
-- [Mapa rozwoju](#mapa-rozwoju)
-- [Licencja / Zastrzeżenia](#licencja--zastrzeżenia)
-- [Zmiany](#zmiany)
-- [Sprzęt testowy](#sprzęt-testowy)
-- [Wkład / Kontrybucje](#wkład--kontrybucje)
-- [Wsparcie](#wsparcie)
 
 ---
 
-## Funkcje
+## ✏️ Krok 6: Tworzenie dashboardu w Home Assistant 
+_______________________________________________________________________________
+( P.S Jeśli niechcesz się bawić z AppDaemon alternatywne rozwiązanie z użyciem [Puppeteer](https://github.com/Adam7411/Joan-6-Puppeteer/blob/main/README.md) )
+_____________________________________________________________________________
 
-- Zintegrowany serwer Visionect + PostgreSQL + Redis
-- Automatyczna inicjalizacja użytkownika i bazy
-- Opcjonalne autodetekcja IP hosta (gdy `visionect_server_address=localhost`)
-- Lekka pętla healthcheck (curl)
-- Trwałe logi (`/data/logs`)
-- Obsługa amd64, aarch64, armv7
-- Przetestowano z Joan 6
+Dobra lecimy dalej, aby wyświetlić interfejs Home Assistant na tablecie, użyjemy dodatku **AppDaemon**.
 
----
+1.  Zainstaluj dodatek **AppDaemon** w Home Assistant (jeśli jeszcze go nie masz).
+2.  Przejdź do katalogu konfiguracyjnego AppDaemon, np. przez dodatek "Samba share" lub "File editor":  
+    `\config\appdaemon\dashboards\` ( umnie to wygląda tak \\adres HA\addon_configs\a7c7b154_appdaemon\dashboards\ )
+3.  Utwórz w tym katalogu nowy plik z rozszerzeniem `.dash`, np. `joanl.dash`.
+4.  Możesz skorzystać z gotowych szablonów dashboardów z tego repozytorium:
+    *   [joan1.dash](https://github.com/Adam7411/Joan-6-Visionect_Home-Assistant/blob/main/joan1.dash)
+    *   [joan2.dash](https://github.com/Adam7411/Joan-6-Visionect_Home-Assistant/blob/main/joan2.dash)
+5.  **Ważne:** Zmodyfikuj plik `joanl.dash lub joan2.dash`, podmieniając przykładowe encje na własne encje z Home Assistant. Szczegółową dokumentację tworzenia dashboardów znajdziesz na [oficjalnej stronie AppDaemon](https://appdaemon.readthedocs.io/en/latest/DASHBOARD_CREATION.html).
+6.  Zrestartuj dodatek AppDaemon, aby załadować nową konfigurację.
+7.  Sprawdź, czy Twój dashboard działa, otwierając w przeglądarce adres:  
+    `http://<adres_ip_ha>:5050/joan1`  
+    (zmień `joanl` na nazwę swojego pliku `.dash` jeśli nie chcesz używać przykładowych plików).
+8.  Skopiuj ten adres URL.
+9.  Wróć do panelu **Visionect Software Suite**, przejdź do ustawień swojego tabletu i w polu **Default URL** wklej skopiowany adres dashboardu. Zapisz zmiany.
+    ![image](https://github.com/user-attachments/assets/00558b5d-ad93-44ab-b4f0-ae8e9b1be20f)
+10. Po chwili na ekranie tabletu powinien pojawić się twój dashboard z Home Assistant. (jesli nie zmień częstotliwość odświeżania** (`Refresh rate`) tylko chwilowo na 2 sekundy aby załadowało nowy dashboard póżniej ustaw swoją wartość)
 
-## Architektura
-
-```
-HA Supervisor -> Kontener dodatku:
-  - redis-server
-  - postgres (127.0.0.1)
-  - supervisord (admin / engine / gateway / networkmanager)
-  - bootstrap (run.sh)
-Porty wystawione: 8081 (UI), 11113 (urządzenia)
-```
-
----
-
-## Obsługiwane platformy
-
-| Architektura | Status | Uwagi |
-|--------------|--------|-------|
-| amd64        | ✅     | Testowane |
-| aarch64      | ✅     | Raspberry Pi 4/5 |
-| armv7        | ✅     | Raspberry Pi 3 (wolniejsze) |
+### Dodatkowe porady
+*   Dla każdego tabletu możesz utworzyć osobny plik `.dash` i przypisać mu unikalny adres URL.
+*   W panelu Visionect warto również dostosować **częstotliwość odświeżania** (`Refresh rate`), aby zbalansować aktualność danych i zużycie baterii.
+    ![image](https://github.com/user-attachments/assets/9f0c1741-76f3-496d-ad44-e316d29621f1)
 
 ---
 
-## Porty
-
-| Cel | Port kontener | Port hosta | Opis |
-|-----|---------------|-----------|------|
-| UI Visionect | 8081 | 8081/tcp | Interfejs zarządzania |
-| Urządzenia / Koala | 11113 | 11113/tcp | Komunikacja z tabletami |
-
----
-
-## Trwałość danych
-
-| Ścieżka | Opis |
-|---------|------|
-| /data/pgdata | Dane PostgreSQL |
-| /data/redis | Katalog redis (bez trwałego zapisu domyślnie) |
-| /data/logs | Logi Visionect i dodatku |
-| /data/options.json | Konfiguracja użytkownika |
-
-Redis domyślnie bez RDB/AOF – szybki start i mniejsze zużycie nośnika.
-
----
-
-## Zawarte komponenty
-
-| Komponent | Źródło |
-|-----------|--------|
-| Visionect Server v3 | `visionect/visionect-server-v3:7.6.5` |
-| PostgreSQL 14 | Pakiety Ubuntu |
-| Redis 6 | Pakiety Ubuntu |
-| Supervisord | Obraz Visionect |
-| Healthcheck | Skrypt bash |
-
----
+## ⭐ Integracja z Home Assistant (Odczyt stanu tabletu i wysyłanie url i własnego tekstu)
 
 
-## Konfiguracja (schema options.json)
+Integracja do odczytu w Home Assistant informacje o stanie tabletu Joan (np. poziom naładowania baterii, status połączenia itp) 
+Do wysyłania swojego adresu url z poziomu HA na Joan 6 np. ( https://www.wikipedia.org/ ) lub lokalne zdjęć ( przykład http://adresHA:8123/local/zdjecie_test.png ) 
+(P.S plik zdjecie_test.png umieszczamy w katalogu: \192.168.xxx.xxx\config\www\) 
+Wysyłanie własnego tekstu na Joan 6 (powiadomień z HA)
 
-| Klucz | Typ | Domyślne | Opis |
-|-------|-----|----------|------|
-| postgres_user | string | visionect | Nazwa użytkownika |
-| postgres_password | string | visionect | ZMIEŃ! |
-| postgres_db | string | koala | Nazwa bazy |
-| visionect_server_address | string | localhost | Adres zewnętrzny dla urządzeń |
-| timezone | string/null | auto | Strefa czasowa |
-| bind_address | string | 0.0.0.0 | Rezerwowe (akt. nieużywane) |
-| healthcheck_enable | bool | true | Włącza pętlę sprawdzającą |
-| healthcheck_url | string | http://127.0.0.1:8081 | URL sprawdzany |
-| healthcheck_interval | int | 30 | Sekundy między testami |
-| healthcheck_max_failures | int | 5 | Ile niepowodzeń przed restartem |
+[Visionect Joan](https://github.com/Adam7411/visionect_joan)
 
-Przykład:
-```json
-{
-  "postgres_user": "visionect",
-  "postgres_password": "MojeSilneHaslo123",
-  "postgres_db": "koala",
-  "visionect_server_address": "192.168.1.50",
-  "timezone": "Europe/Warsaw",
-  "healthcheck_enable": true
-}
-```
+Pozwoli to na tworzenie automatyzacji n.p:
 
----
+wysyłania powiadomienia o niskim stanie baterii Joan 6 albo wyświetlenie encji z poziomem baterii na Joan 6
 
-## Healthcheck
+wysyłanie zdjęć do różnych powiadomień poczym spowrotem powrót do dashboardu appdaemon itp.
 
-Pętla `curl` monitoruje UI. Po `healthcheck_max_failures` nieudanych próbach kontener wychodzi → Supervisor restartuje.
+wysyłanie zrzutu z kamery snapshot.jpg
 
----
+wysyłanie powiadomień tekstowych z Home Assistant na Joan 6
 
-## Logi
-
-- Lokalizacja trwała: `/data/logs`
-- Podgląd w UI dodatku (stdout)
-- Pliki: `admin.log`, `engine.log`, `gateway.log`, `networkmanager.log`
-
----
-
-## Aktualizacje
-
-1. Kopia zapasowa HA
-2. Aktualizacja dodatku w UI
-3. Dane PostgreSQL zachowane
-4. Przy zmianach głównej wersji Visionect – test na środowisku testowym
-
----
-
-## Rozwiązywanie problemów
-
-| Objaw | Przyczyna | Rozwiązanie |
-|-------|-----------|-------------|
-| Restartuje się | Healthcheck pada | Sprawdź UI / port 8081 |
-| Brak UI | Port zajęty | Zmień mapowanie portu |
-| Urządzenie nie łączy | Zły adres serwera | Ustaw `visionect_server_address` na IP LAN |
-| Puste logi | Symlink nie powstał | Usuń `/var/log/vss`, restart |
-
-Diagnostyka:
-```
-ss -ltnp
-tail -n 100 /data/logs/*.log
-ps -ef | grep -i visionect
-```
-
----
-
-## Uwagi bezpieczeństwa
-
-- Zmień hasło `postgres_password`
-- Rozważ reverse proxy + TLS
-- Nie wystawiaj portów publicznie bez ochrony
-- Wbudowana baza = wygoda, nie zawsze idealna dla produkcji
-
----
-
-## Mapa rozwoju
-
-- Obsługa zewnętrznego PostgreSQL
-- Włączenie persistent Redis (opcjonalnie)
-- Ingress
-- Auto-backup
-- Panel statusu urządzeń
-
----
-
-## Licencja / Zastrzeżenia
-
-- Visionect Server: licencja Visionect (zewnętrzna).
-- Ten wrapper: (np.) MIT – dostosuj według potrzeb.
-- Brak gwarancji. Używasz na własne ryzyko.
-
----
-
-## Zmiany
-
-Patrz historia Git (lub dodany plik `CHANGELOG.md` w przyszłości).
-
----
-
-## Sprzęt testowy
-
-- Joan 6 – rejestracja i interfejs działają prawidłowo.
-
----
-
-## Wkład / Kontrybucje
-
-Chętnie przyjmowane:
-1. Fork
-2. Branch
-3. Commit
-4. Pull Request (z opisem zmian & testami)
-
----
-
-## Wsparcie
-
-Zgłoś Issue w repozytorium:
-- Wersja dodatku
-- Fragmenty logów
-- Kroki odtworzenia
-
-
+<img width="510" height="739" alt="3" src="https://github.com/user-attachments/assets/8f8c673d-8447-42ec-9d13-0bd4e9683437" />
+<img width="948" height="791" alt="2" src="https://github.com/user-attachments/assets/4a3c054a-e239-49c1-ab9d-037584cd7989" />
+<img width="607" height="893" alt="1" src="https://github.com/user-attachments/assets/1321cfe8-905d-44ef-b1b9-29d999559a04" />
+<img width="770" height="641" alt="4" src="https://github.com/user-attachments/assets/31e9bca1-d7c6-4245-b32f-4c909251bf2c" />
+<img width="433" height="290" alt="vvvvu" src="https://github.com/user-attachments/assets/efcf4b46-19ac-4b98-aeff-7fa63a648c65" />
