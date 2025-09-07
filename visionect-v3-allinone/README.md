@@ -1,3 +1,8 @@
+<div align="right">
+<a href="README.md">English</a> | <a href="README_pl.md">Polski</a>
+</div>
+
+
 # Visionect Server v3 (All‑in‑One) Home Assistant Add-on
 
 All‑in‑one packaged Visionect Server v3 stack (Visionect upstream image + embedded PostgreSQL + Redis) for Home Assistant Supervisor.  
