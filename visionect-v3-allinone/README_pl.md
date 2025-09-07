@@ -12,13 +12,13 @@ Przetestowano z tabletem Joan 6.
 
 > WAŻNE: Dodatek owija oficjalny obraz `visionect/visionect-server-v3:7.6.5`. Użycie podlega oryginalnej licencji Visionect. Ten repozytorium zawiera tylko logikę integracyjną (baza danych, redis, skrypty startowe). Upewnij się, że masz prawo używać oprogramowania Visionect.
 
-## Szybki start
+## Instalacja
 
-1. Dodaj repozytorium dodatku do Home Assistant (Add-on Store → 3 kropki → Repositories).
-2. Otwórz dodatek „Visionect Server v3 (All-in-One)” i zainstaluj.
+1. Dodaj URL repozytorium jako Custom Repository w Sklepie dodatków HA.
+2. Wybierz „Visionect Server v3 (All-in-One)” → Zainstaluj.
 3. Uruchom dodatek.
-4. Wejdź w Web UI (przycisk lub port http://adresHA:8081).
-5. Zarejestruj urządzenie
+4. Otwórz UI: `http://<adres_HA>:8081`.
+
 
 
 ## Spis treści
@@ -114,16 +114,6 @@ Redis domyślnie bez RDB/AOF – szybki start i mniejsze zużycie nośnika.
 
 ---
 
-## Instalacja
-
-1. Dodaj URL repozytorium jako Custom Repository w Sklepie dodatków HA.
-2. Wybierz „Visionect Server v3 (All-in-One)” → Zainstaluj.
-3. Skonfiguruj hasła w zakładce Konfiguracja (zmień `postgres_password`).
-4. Uruchom dodatek.
-5. Otwórz UI: `http://<adres_HA>:8081`.
-6. Sparuj tablet Joan 6.
-
----
 
 ## Konfiguracja (schema options.json)
 
