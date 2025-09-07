@@ -1,0 +1,16 @@
+#!/usr/bin/with-contenv bash
+set -euo pipefail
+
+DATA_DIR="/data/pgdata"
+mkdir -p "${DATA_DIR}"
+chown -R postgres:postgres "${DATA_DIR}"
+
+# Inicjalizacja przy pierwszym starcie
+if [ ! -s "${DATA_DIR}/PG_VERSION" ]; then
+  echo "[postgres] Initializing cluster in ${DATA_DIR}"
+  su -s /bin/bash - postgres -c "initdb -D '${DATA_DIR}' -E UTF8"
+  echo "listen_addresses = '127.0.0.1'" >> "${DATA_DIR}/postgresql.conf"
+  echo "host all all 127.0.0.1/32 trust" >> "${DATA_DIR}/pg_hba.conf"
+fi
+
+exec su -s /bin/bash - postgres -c "postgres -D '${DATA_DIR}'"
