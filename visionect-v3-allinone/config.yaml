@@ -1,5 +1,5 @@
 name: Visionect Server v3 (All-in-One)
-version: "7.6.5-10"
+version: "7.6.5-11"
 slug: visionect_v3_allinone
 description: "Visionect Server v3 + PostgreSQL + Redis w jednym dodatku (Raspberry Pi i x86-64)"
 url: "https://docs.visionect.com/VisionectSoftwareSuite/ManagementInterface.html"
