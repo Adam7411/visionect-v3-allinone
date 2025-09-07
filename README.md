@@ -1,9 +1,6 @@
 [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FAdam7411%2Fvisionect-v3-allinone)
 
-<!-- README_PL.md -->
-<div align="right">
-<a href="README.md">English</a> | <a href="README_pl.md">Polski</a>
-</div>
+[Polska wersja dokumentacji (README_pl.md)](https://github.com/Adam7411/visionect-v3-allinone/blob/main/visionect-v3-allinone/README_pl.md)
 
 # Visionect Server v3 (All‑in‑One) Home Assistant Add-on
 
@@ -12,6 +9,17 @@ Tested with a Joan 6 e‑paper device.
 
 > IMPORTANT: This add-on wraps the official `visionect/visionect-server-v3:7.6.5` Docker image. Usage is subject to Visionect’s original license/terms. This repository only adds orchestration glue (database + redis + HA integration). You are responsible for having the right to run the upstream software.
 
+## Installation
+
+1. Add this custom repository URL to Home Assistant Add-on Store.
+2. Locate “Visionect Server v3 (All-in-One)” in the store.
+3. Click Install.
+4. Open Configuration tab and set:
+   - `postgres_password` (change default!)
+   - Optionally `visionect_server_address` to your HA host IP (e.g. `192.168.1.50`).
+5. Start the add-on.
+6. Open Web UI (or navigate to `http://<HA_HOST>:8081`).
+7. Pair your Joan 6 device.
 ---
 
 ## Contents
@@ -121,19 +129,7 @@ If you want persistence, adjust `redis-server` flags in `run.sh`.
 | Supervisord         | From upstream Visionect image |
 | Healthcheck (curl loop) | Custom shell logic |
 
----
 
-## Installation
-
-1. Add this custom repository URL to Home Assistant Add-on Store.
-2. Locate “Visionect Server v3 (All-in-One)” in the store.
-3. Click Install.
-4. Open Configuration tab and set:
-   - `postgres_password` (change default!)
-   - Optionally `visionect_server_address` to your HA host IP (e.g. `192.168.1.50`).
-5. Start the add-on.
-6. Open Web UI (or navigate to `http://<HA_HOST>:8081`).
-7. Pair your Joan 6 device.
 
 ---
 
