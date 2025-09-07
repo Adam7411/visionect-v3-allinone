@@ -36,7 +36,7 @@ Przetestowano z tabletem Joan 6.
         *   **Server IP**: Adres IP Home Assistanta (np. `192.168.1.100`).
         *   **Port**: `11113`
      
-          Visionect Configurator wersja 2.0
+       
     ![image](https://github.com/user-attachments/assets/de30fd1e-9bd3-4f98-ab00-9a3b534f7332)
 
 _______________________________________________
