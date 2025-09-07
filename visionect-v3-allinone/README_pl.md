@@ -33,7 +33,7 @@ Przetestowano z tabletem Joan 6.
     *   Wybierz swoją sieć Wi-Fi i wpisz hasło.
     *   Przejdź do zakładki **Advanced Connectivity**.
     *   Wprowadź dane swojego serwera:
-        *   **Server IP**: Adres IP Twojej maszyny wirtualnej z Dockerem (np. `192.168.1.100`).
+        *   **Server IP**: Adres IP Home Assistanta (np. `192.168.1.100`).
         *   **Port**: `11113`
      
           Visionect Configurator wersja 2.0
@@ -50,10 +50,8 @@ _______________________________________________
 
 ## ✏️ Krok 6: Tworzenie dashboardu w Home Assistant 
 _______________________________________________________________________________
-( P.S Jeśli niechcesz się bawić z AppDaemon alternatywne rozwiązanie z użyciem [Puppeteer](https://github.com/Adam7411/Joan-6-Puppeteer/blob/main/README.md) )
-_____________________________________________________________________________
 
-Dobra lecimy dalej, aby wyświetlić interfejs Home Assistant na tablecie, użyjemy dodatku **AppDaemon**.
+Użyjemy dodatku **AppDaemon**.
 
 1.  Zainstaluj dodatek **AppDaemon** w Home Assistant (jeśli jeszcze go nie masz).
 2.  Przejdź do katalogu konfiguracyjnego AppDaemon, np. przez dodatek "Samba share" lub "File editor":  
