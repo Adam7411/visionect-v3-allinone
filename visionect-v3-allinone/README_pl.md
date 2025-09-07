@@ -7,12 +7,19 @@
 
 # Visionect Server v3 (All‑in‑One) – Dodatek Home Assistant
 
-Wszystko‑w‑jednym: Visionect Server v3 (oficjalny obraz) + PostgreSQL + Redis w jednym kontenerze dodatku Home Assistant.  
+Visionect Server v3 (oficjalny obraz) + PostgreSQL + Redis w jednym kontenerze dodatku Home Assistant.  
 Przetestowano z tabletem Joan 6.
 
 > WAŻNE: Dodatek owija oficjalny obraz `visionect/visionect-server-v3:7.6.5`. Użycie podlega oryginalnej licencji Visionect. Ten repozytorium zawiera tylko logikę integracyjną (baza danych, redis, skrypty startowe). Upewnij się, że masz prawo używać oprogramowania Visionect.
 
----
+## Szybki start
+
+1. Dodaj repozytorium dodatku do Home Assistant (Add-on Store → 3 kropki → Repositories).
+2. Otwórz dodatek „Visionect Server v3 (All-in-One)” i zainstaluj.
+3. Uruchom dodatek.
+4. Wejdź w Web UI (przycisk lub port http://adresHA:8081).
+5. Zarejestruj urządzenie
+
 
 ## Spis treści
 
