@@ -31,7 +31,7 @@ Tested with a Joan 6 e‑paper device.
 
 4. Go to **Advanced Connectivity**:
 
-   * Server IP: e.g., `192.168.1.100`
+   * Server IP: e.g., `192.168.1.100` 
    * Port: `11113`
     ![image](https://github.com/user-attachments/assets/de30fd1e-9bd3-4f98-ab00-9a3b534f7332)
 5. Click connect. The tablet should appear in the Visionect server panel.
