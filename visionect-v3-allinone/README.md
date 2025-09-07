@@ -16,280 +16,55 @@ Tested with a Joan 6 e‑paper device.
 3. Click Install.
 4. Start the add-on.
 5. Open Web UI (or navigate to `http://<HA_HOST>:8081`).
+## 📲 Step 5: Configure the Tablet
+
+1. Download Visionect Configurator:
+
+   * Windows: [VisionectConfigurator.exe](https://files.visionect.com/VisionectConfigurator/VisionectConfigurator.exe)
+   * Linux: [VisionectConfigurator\_linux.deb](https://files.visionect.com/VisionectConfigurator/VisionectConfigurator_linux.deb)
+   * macOS: [Intel](https://files.visionect.com/VisionectConfigurator/VisionectConfigurator_intel.dmg) | [Apple Silicon](https://files.visionect.com/VisionectConfigurator/VisionectConfigurator_m1.dmg)
+   * Older version: [1.3.10](https://files.visionect.com/VisionectConfigurator2.exe) [VC_1.exe](https://files.visionect.com/VC_1.exe)
+
+2. Connect the tablet to USB.
+
+3. Select Wi-Fi, enter password.
+
+4. Go to **Advanced Connectivity**:
+
+   * Server IP: e.g., `192.168.1.100`
+   * Port: `11113`
+    ![image](https://github.com/user-attachments/assets/de30fd1e-9bd3-4f98-ab00-9a3b534f7332)
+5. Click connect. The tablet should appear in the Visionect server panel.
 
 ---
 
-## Contents
+## ✏️ Step 6: Create a Dashboard for Home Assistant
 
-- [Features](#features)
-- [Architecture](#architecture)
-- [Supported platforms](#supported-platforms)
-- [Screens / Ports](#screens--ports)
-- [Data persistence](#data-persistence)
-- [Included components](#included-components)
-- [Installation](#installation)
-- [Configuration (options.json schema)](#configuration-optionsjson-schema)
-- [Healthcheck](#healthcheck)
-- [Logs](#logs)
-- [Updating / Upgrading](#updating--upgrading)
-- [Troubleshooting](#troubleshooting)
-- [Security Notes](#security-notes)
-- [Roadmap](#roadmap)
-- [License / Disclaimer](#license--disclaimer)
-- [Changelog](#changelog)
+> You can also use [Puppeteer version](https://github.com/Adam7411/Joan-6-Puppeteer/blob/main/README.md) if you don't want to use AppDaemon.
+
+1. Install **AppDaemon** in Home Assistant.
+2. Go to: `\HA_IP\config\appdaemon\dashboards\` \addon_configs\a7c7b154_appdaemon\dashboards\ )
+3. Create a file, e.g., `joan1.dash`
+4. Example files:
+
+   * [joan1.dash](https://github.com/Adam7411/Joan-6-Visionect_Home-Assistant/blob/main/joan1.dash)
+   * [joan2.dash](https://github.com/Adam7411/Joan-6-Visionect_Home-Assistant/blob/main/joan2.dash)
+5. Edit and insert your own Home Assistant entities.
+6. Restart AppDaemon.
+7. Test: `http://<HA_IP>:5050/joan1`
+8. Copy URL, paste into **Default URL** in Visionect dashboard settings.
+9. Adjust **Refresh Rate** if necessary (e.g., 2 seconds initially).
 
 ---
 
-## Features
+Integration with Home Assistant (Tablet status reading and URL sending)
+Integration for reading information about the status of the Joan tablet in Home Assistant (e.g. battery level, connection status, etc.), as well as for sending your own URL ( e.g. https://www.wikipedia.org/ ) or local images ( example: http://HAaddress:8123/local/test_image.png
+P.S. The file test_image.png should be placed in the folder: \\192.168.xxx.xxx\config\www\
 
-- Runs Visionect Server v3 side-by-side with:
-  - Embedded PostgreSQL (cluster stored in `/data/pgdata`)
-  - Embedded Redis (ephemeral / no persistence by default)
-- Automatic first‑run initialization of DB user + database
-- Optional auto-detection of host IP if `visionect_server_address` left at `localhost`
-- Integrated lightweight HTTP health check watchdog
-- Graceful shutdown handling (SIGTERM / SIGINT)
-- Persistent logs (symlink `/var/log/vss` → `/data/logs`)
-- Works on amd64, aarch64, armv7 (e.g. Raspberry Pi & x86_64)
-- Tested with Joan 6 tablet
+👉 [Visionect Joan](https://github.com/Adam7411/visionect_joan) 👈
 
----
+This allows for creating automations, such as sending low battery notifications, displaying an entity with battery level on the tablet, or sending images for different notifications, and then returning to the AppDaemon dashboard, etc.
 
-## Architecture
-
-```
-+--------------------------+
-| Home Assistant Supervisor|
-+------------+-------------+
-             |
-             v (Add-on)
-   +-------------------------------+
-   | Visionect All-in-One Container|
-   |  - run.sh (bootstrap)         |
-   |  - Redis (port 6379 internal) |
-   |  - PostgreSQL (127.0.0.1:5432)|
-   |  - Visionect processes via    |
-   |    supervisord (admin/engine…)|
-   +-------------------------------+
-             |
-     Exposed Ports (Host)
-       8081 -> Visionect Management UI
-       11113 -> Device communication (Joan)
-```
-
-All internal services communicate via loopback; only Visionect UI/device port is published.
-
----
-
-## Supported Platforms
-
-| Architecture | Status | Notes |
-|--------------|--------|-------|
-| amd64        | ✅     | Tested |
-| aarch64      | ✅     | Raspberry Pi 4 / 5 |
-| armv7        | ✅     | Raspberry Pi 3 (reduced performance) |
-
----
-
-## Screens / Ports
-
-| Purpose | Container Port | Host Mapping | Description |
-|---------|----------------|--------------|-------------|
-| Visionect Management UI | 8081 | 8081/tcp | Web interface |
-| Device service / Koala  | 11113| 11113/tcp| Device communication (Joan, etc.) |
-
-Update `config.yaml` / Supervisor UI if you need custom host ports.
-
----
-
-## Data Persistence
-
-| Path (Container) | Backed By | Description |
-|------------------|----------|-------------|
-| /data/pgdata     | Supervisor managed persistent volume | PostgreSQL cluster |
-| /data/redis      | Persistent directory (not actively used for dump) | Redis dir (no RDB/AOF) |
-| /data/logs       | Persistent | Visionect & add-on logs (symlink from `/var/log/vss`) |
-| /data/options.json | Supervisor | Your runtime configuration |
-
-Redis is configured without persistence by design (fast start, low wear).  
-If you want persistence, adjust `redis-server` flags in `run.sh`.
-
----
-
-## Included Components
-
-| Component | Source |
-|-----------|--------|
-| Visionect Server v3 | `visionect/visionect-server-v3:7.6.5` |
-| PostgreSQL 14       | Ubuntu packages |
-| Redis 6             | Ubuntu packages |
-| Supervisord         | From upstream Visionect image |
-| Healthcheck (curl loop) | Custom shell logic |
-
-
-
----
-
-## Configuration (options.json schema)
-
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| postgres_user | string | visionect | Application DB user |
-| postgres_password | string | visionect | CHANGE THIS IN PRODUCTION |
-| postgres_db | string | koala | Application DB name |
-| visionect_server_address | string | localhost | External address devices will use (auto-IP detection if left `localhost`) |
-| timezone | string/null | auto | If set, will export TIMEZONE |
-| bind_address | string | 0.0.0.0 | (Reserved – currently Visionect services bind internally) |
-| healthcheck_enable | bool | true | Enable internal curl loop |
-| healthcheck_url | string | http://127.0.0.1:8081 | URL polled for health |
-| healthcheck_interval | int | 30 | Seconds between checks |
-| healthcheck_max_failures | int | 5 | Consecutive failures before exit (Supervisor restarts) |
-
-Example (raw options.json):
-```json
-{
-  "postgres_user": "visionect",
-  "postgres_password": "strongSecret123",
-  "postgres_db": "koala",
-  "visionect_server_address": "192.168.1.50",
-  "timezone": "Europe/Warsaw",
-  "healthcheck_enable": true,
-  "healthcheck_url": "http://127.0.0.1:8081",
-  "healthcheck_interval": 30,
-  "healthcheck_max_failures": 5
-}
-```
-
----
-
-## Healthcheck
-
-A background loop runs `curl -fsS` against `healthcheck_url`.  
-If `healthcheck_max_failures` is exceeded the add-on exits → Supervisor restarts it.
-
-Set `healthcheck_enable: false` to disable.
-
----
-
-## Logs
-
-Persistent path: `/data/logs`
-
-Key log files:
-- `admin.log`
-- `engine.log`
-- `gateway.log`
-- `networkmanager.log`
-
-Supervisor Add-on UI consolidates stdout/stderr (includes bootstrap + supervisord events).
-
----
-
-## Updating / Upgrading
-
-1. Backup Home Assistant (recommended).
-2. Update add-on via UI (new version bumps `version` in `config.yaml`).
-3. PostgreSQL data preserved in `/data/pgdata`.
-4. Review upstream Visionect release notes if the base image tag changes.
-
-If upstream major version changes, test on a staging environment first.
-
----
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Fix |
-|---------|--------------|-----|
-| Add-on restarts repeatedly | Healthcheck failing | Check UI availability, adjust `healthcheck_url` |
-| DB init fails (`initdb: command not found`) | Missing server package | Reinstall / check Dockerfile integrity |
-| UI not reachable on 8081 | Port conflict / firewall | Change host port mapping in advanced settings |
-| Device can’t connect | Wrong `visionect_server_address` | Set to host LAN IP |
-| Logs empty | Symlink not created | Remove `/var/log/vss`, restart add-on |
-
-Quick diagnostics inside container:
-```
-ss -ltnp
-tail -n 100 /data/logs/*.log
-ps -ef | grep -i visionect
-```
-
----
-
-## Security Notes
-
-- Change `postgres_password` immediately after first start.
-- The embedded database is for convenience—consider an external managed PostgreSQL for production scale.
-- Redis runs without auth and listens only inside the container (OK for this bundled use).
-- No TLS termination is provided; place behind a reverse proxy if exposing remotely.
-- Ensure your Home Assistant instance is not directly exposed to the public internet without proper protection.
-
----
-
-## Roadmap
-
-- Optional external PostgreSQL mode (skip embedded server)
-- Redis persistence toggle (AOF option)
-- Ingress support (HA reverse proxy)
-- Automated backup export script
-- Multi-device status panel
-
-Contributions welcome—feel free to open Issues / PRs.
-
----
-
-## Adding an Icon / Logo
-
-Place `icon.png` (256×256) and optional `logo.png` in the add-on directory (same level as `config.yaml`), then:
-1. Commit & push
-2. Reload Add-on Store in HA
-3. Bump `version` if cache persists
-
----
-
-## License / Disclaimer
-
-- Upstream Visionect Server: subject to Visionect’s original license (not included here).
-- This repository: wrapper scripts & configuration under MIT (adjust if you choose another).
-- No warranty. You assume all risk using proprietary upstream components.
-
-(Replace this section with the actual license you choose for your glue code.)
-
----
-
-## Changelog
-
-See `CHANGELOG.md` (to be added) or Git history.
-
----
-
-## Tested Hardware
-
-- Joan 6 (e‑paper tablet) – successful registration & management UI verified.
-
----
-
-## Contributing
-
-1. Fork
-2. Create feature branch
-3. Commit changes
-4. Open PR with clear description
-
-Please include:
-- Rationale
-- Test notes
-- Impact on existing data
-
----
-
-## Support
-
-Issues / questions: open a GitHub Issue in this repository.  
-Please attach:
-- Add-on version
-- Relevant log excerpts
-- Steps to reproduce
-
----
+<img width="510" height="739" alt="3" src="https://github.com/user-attachments/assets/8f8c673d-8447-42ec-9d13-0bd4e9683437" /> <img width="948" height="791" alt="2" src="https://github.com/user-attachments/assets/4a3c054a-e239-49c1-ab9d-037584cd7989" /> <img width="607" height="893" alt="1" src="https://github.com/user-attachments/assets/1321cfe8-905d-44ef-b1b9-29d999559a04" /> <img width="770" height="641" alt="4" src="https://github.com/user-attachments/assets/31e9bca1-d7c6-4245-b32f-4c909251bf2c" />
 
 
