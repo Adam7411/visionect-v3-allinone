@@ -1,4 +1,4 @@
-https://github.com/Adam7411/visionect-v3-allinone/blob/main/visionect-v3-allinone/README_pl.md
+[Polska wersja dokumentacji (README_pl.md)](https://github.com/Adam7411/visionect-v3-allinone/blob/main/visionect-v3-allinone/README_pl.md)
 
 # Visionect Server v3 (All‑in‑One) Home Assistant Add-on
 
