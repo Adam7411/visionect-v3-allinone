@@ -14,12 +14,9 @@ Tested with a Joan 6 e‑paper device.
 1. Add this custom repository URL to Home Assistant Add-on Store.
 2. Locate “Visionect Server v3 (All-in-One)” in the store.
 3. Click Install.
-4. Open Configuration tab and set:
-   - `postgres_password` (change default!)
-   - Optionally `visionect_server_address` to your HA host IP (e.g. `192.168.1.50`).
-5. Start the add-on.
-6. Open Web UI (or navigate to `http://<HA_HOST>:8081`).
-7. Pair your Joan 6 device.
+4. Start the add-on.
+5. Open Web UI (or navigate to `http://<HA_HOST>:8081`).
+
 ---
 
 ## Contents
