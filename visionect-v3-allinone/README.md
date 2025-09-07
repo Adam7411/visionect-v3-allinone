@@ -294,4 +294,4 @@ Please attach:
 
 ---
 
-Enjoy using Visionect Server in Home Assistant!
+
