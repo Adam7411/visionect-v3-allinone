@@ -64,6 +64,8 @@ Integration for reading information about the status of the Joan tablet in Home 
 P.S. The file test_image.png should be placed in the folder: \\192.168.xxx.xxx\config\www\
 
 👉 [Visionect Joan](https://github.com/Adam7411/visionect_joan) 👈
+👉 [Visionect Joan](https://github.com/Adam7411/visionect_joan) 👈
+
 
 This allows for creating automations, such as sending low battery notifications, displaying an entity with battery level on the tablet, or sending images for different notifications, and then returning to the AppDaemon dashboard, etc.
 
