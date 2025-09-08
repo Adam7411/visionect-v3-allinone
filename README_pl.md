@@ -76,7 +76,7 @@ Użyjemy dodatku **AppDaemon**.
 ### Dodatkowe porady
 *   Dla każdego tabletu możesz utworzyć osobny plik `.dash` i przypisać mu unikalny adres URL.
 *   W panelu Visionect warto również dostosować **częstotliwość odświeżania** (`Refresh rate`), aby zbalansować aktualność danych i zużycie baterii.
-    ![image](https://github.com/user-attachments/assets/9f0c1741-76f3-496d-ad44-e316d29621f1)
+
 
 ---
 
