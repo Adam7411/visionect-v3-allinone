@@ -12,7 +12,7 @@ Przetestowano z tabletem Joan 6.
 
 > WAŻNE: Dodatek owija oficjalny obraz `visionect/visionect-server-v3:7.6.5`. Użycie podlega oryginalnej licencji Visionect. Ten repozytorium zawiera tylko logikę integracyjną (baza danych, redis, skrypty startowe). 
 
-<img width="1836" height="729" alt="pppp" src="https://github.com/user-attachments/assets/1aaae475-87b1-4e0f-a94e-ddddb0ee9df9" />
+
 
 
 ## Instalacja
@@ -72,7 +72,7 @@ Użyjemy dodatku **AppDaemon**.
 9.  Wróć do panelu **Visionect Software Suite**, przejdź do ustawień swojego tabletu i w polu **Default URL** wklej skopiowany adres dashboardu. Zapisz zmiany.
     ![image](https://github.com/user-attachments/assets/00558b5d-ad93-44ab-b4f0-ae8e9b1be20f)
 10. Po chwili na ekranie tabletu powinien pojawić się twój dashboard z Home Assistant. (jesli nie zmień częstotliwość odświeżania** (`Refresh rate`) tylko chwilowo na 2 sekundy aby załadowało nowy dashboard póżniej ustaw swoją wartość)
-
+<img width="1836" height="729" alt="pppp" src="https://github.com/user-attachments/assets/1aaae475-87b1-4e0f-a94e-ddddb0ee9df9" />
 ### Dodatkowe porady
 *   Dla każdego tabletu możesz utworzyć osobny plik `.dash` i przypisać mu unikalny adres URL.
 *   W panelu Visionect warto również dostosować **częstotliwość odświeżania** (`Refresh rate`), aby zbalansować aktualność danych i zużycie baterii.
