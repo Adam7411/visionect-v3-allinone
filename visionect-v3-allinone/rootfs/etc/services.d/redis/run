@@ -1,7 +1,0 @@
-#!/command/with-contenv bash
-# Możesz dodać warunek persistence z options
-if [ "{{ .options.enable_redis_persistence }}" = "true" ]; then
-  exec redis-server --dir "${REDIS_DATA}" --appendonly yes --save 60 100
-else
-  exec redis-server --dir "${REDIS_DATA}" --appendonly no
-fi

@@ -1,4 +1,0 @@
-#!/command/with-contenv bash
-# Ustal właściwą binarkę/komendę Visionect (przykład)
-# Jeśli wymaga innego katalogu roboczego – dodaj (cd /opt/visionect)
-exec /usr/bin/visionect-server
