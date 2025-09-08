@@ -1,4 +1,10 @@
 build_from:
-  amd64: "visionect/visionect-server-v3:7.6.5"
-  aarch64: "visionect/visionect-server-v3:7.6.5-arm"
-  armv7: "visionect/visionect-server-v3:7.6.5-arm"
+  aarch64: visionect/visionect-server-v3:7.6.5-arm
+  armv7: visionect/visionect-server-v3:7.6.5-arm
+labels:
+  org.opencontainers.image.title: "Visionect Server All-in-One"
+  org.opencontainers.image.description: "Visionect Server z wbudowanym Postgres i Redis dla Home Assistanta"
+  org.opencontainers.image.vendor: "Adam7411"
+  org.opencontainers.image.version: "0.2.0"
+args:
+  VISIONECT_VERSION: "7.6.5"
