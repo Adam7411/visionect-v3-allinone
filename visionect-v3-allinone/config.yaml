@@ -1,11 +1,13 @@
 name: Visionect Server (All-in-One)
-version: 0.2.0
+version: 0.2.1
 slug: visionect_v3_allinone
-description: Visionect Server + Postgres + Redis w jednym add-onie Home Assistant.
+description: Visionect Server + Postgres + Redis (automatyczny wybór obrazu bazowego dla amd64 / armv7)
 url: https://github.com/Adam7411/visionect-v3-allinone
 arch:
-  - aarch64
+  - amd64
   - armv7
+# (Opcjonalnie dodaj poniższe jeśli chcesz wymusić użycie armv7 obrazu na 64-bit ARM; odkomentuj jeśli testujesz)
+#  - aarch64
 startup: services
 boot: auto
 init: false
@@ -22,7 +24,6 @@ ports:
 ports_description:
   8081/tcp: Visionect Web UI
   11113/tcp: Visionect Device Channel
-environment: {}
 schema:
   db_password: password
   server_address: str
@@ -35,7 +36,6 @@ options:
   enable_redis_persistence: false
   visionect_debug: false
   custom_http_port: 8081
-image: ghcr.io/adam7411/visionect-v3-allinone-{arch}
 privileged:
   - SYS_ADMIN
 devices:
