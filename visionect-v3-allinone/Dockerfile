@@ -1,25 +1,30 @@
 ARG BUILD_FROM
 FROM ${BUILD_FROM}
 
-ENV DEBIAN_FRONTEND=noninteractive
+# (Opcjonalnie) ARG VISIONECT_VERSION (jeśli używasz)
+ARG VISIONECT_VERSION
 
-# Jeśli wcześniej usunąłeś instalację serwera, upewnij się że te pakiety są
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    postgresql postgresql-contrib \
-    redis-server \
-    jq \
-    ca-certificates \
+# Instalacja zależności (zakładam Debian/Ubuntu base w obrazie Visionect)
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+      postgresql redis-server curl ca-certificates tzdata bash coreutils procps \
     && rm -rf /var/lib/apt/lists/*
 
-# Użytkownik postgres (jeżeli nie istnieje)
-RUN id postgres 2>/dev/null || useradd -r -s /bin/bash postgres
+# Ustawienia katalogów danych
+ENV PGDATA=/data/postgres \
+    REDIS_DATA=/data/redis \
+    VISIONECT_DATA=/data/visionect \
+    LC_ALL=C.UTF-8 \
+    LANG=C.UTF-8
 
-# Katalogi danych (mogą też powstać w run.sh, ale to nie szkodzi)
-RUN mkdir -p /data/pgdata /data/redis && chown -R postgres:postgres /data/pgdata
+# Tworzenie katalogów
+RUN mkdir -p /data/postgres /data/redis /data/visionect && \
+    chown -R root:root /data
 
-COPY run.sh /run.sh
-RUN chmod 755 /run.sh
+# Kopiowanie rootfs (s6 services + inicjalizacja)
+COPY rootfs/ /
+
+# Uprawnienia do skryptów
+RUN chmod -R 755 /etc/services.d /etc/cont-init.d
 
 EXPOSE 8081 11113
-
-ENTRYPOINT ["/run.sh"]
