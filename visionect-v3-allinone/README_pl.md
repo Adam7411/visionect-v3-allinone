@@ -77,13 +77,13 @@ Użyjemy dodatku **AppDaemon**.
 
 ---
 
-## ⭐ Obowiazkowa integracja z Home Assistant (Odczyt stanu tabletu i wysyłanie zdjęc url i własnego tekstu)
+## ⭐ Obowiazkowa integracja Visionect Joan dla Home Assistant (Odczyt stanu tabletu i wysyłanie zdjęc url i własnego tekstu)
 
 
-Integracja do odczytu w Home Assistant informacje o stanie tabletu Joan (np. poziom naładowania baterii, status połączenia itp) 
-Do wysyłania swojego adresu url z poziomu HA na Joan 6 np. ( https://www.wikipedia.org/ ) lub lokalne zdjęć ( przykład http://adresHA:8123/local/zdjecie_test.png ) 
+Integracja do odczytu w Home Assistant informacji o stanie tabletu Joan (np. poziom naładowania baterii, status połączenia itp) 
+Do wysyłania swojego adresu url tekstu i zdjęć z poziomu HA na Joan 6 np. ( https://www.wikipedia.org/ ) lub lokalne zdjęć ( przykład http://adresHA:8123/local/zdjecie_test.png ) 
 (P.S plik zdjecie_test.png umieszczamy w katalogu: \192.168.xxx.xxx\config\www\) 
-Wysyłanie własnego tekstu na Joan 6 (powiadomień z HA)
+
 
 👉 [Visionect Joan](https://github.com/Adam7411/visionect_joan) 👈
 👉 [Visionect Joan](https://github.com/Adam7411/visionect_joan) 👈
@@ -96,7 +96,7 @@ wysyłanie zdjęć do różnych powiadomień poczym spowrotem powrót do dashboa
 
 wysyłanie zrzutu z kamery snapshot.jpg
 
-wysyłanie powiadomień tekstowych z Home Assistant na Joan 6
+wysyłanie powiadomień tekstowych z Home Assistant na Joan 6 itp
 
 <img width="510" height="739" alt="3" src="https://github.com/user-attachments/assets/8f8c673d-8447-42ec-9d13-0bd4e9683437" />
 <img width="948" height="791" alt="2" src="https://github.com/user-attachments/assets/4a3c054a-e239-49c1-ab9d-037584cd7989" />
