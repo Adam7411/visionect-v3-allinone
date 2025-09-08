@@ -12,6 +12,9 @@ Przetestowano z tabletem Joan 6.
 
 > WAŻNE: Dodatek owija oficjalny obraz `visionect/visionect-server-v3:7.6.5`. Użycie podlega oryginalnej licencji Visionect. Ten repozytorium zawiera tylko logikę integracyjną (baza danych, redis, skrypty startowe). 
 
+<img width="1836" height="729" alt="pppp" src="https://github.com/user-attachments/assets/e078c421-1da9-404e-9e76-a331724fbf4c" />
+
+
 ## Instalacja
 
 1. Dodaj URL repozytorium jako Custom Repository w Sklepie dodatków HA.
