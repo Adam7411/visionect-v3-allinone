@@ -7,7 +7,7 @@
 All‑in‑one packaged Visionect Server v3 stack (Visionect upstream image + embedded PostgreSQL + Redis) for Home Assistant Supervisor.  
 Tested with a Joan 6 e‑paper device.
 
-> IMPORTANT: This add-on wraps the official `visionect/visionect-server-v3:7.6.5` Docker image. Usage is subject to Visionect’s original license/terms. This repository only adds orchestration glue (database + redis + HA integration). You are responsible for having the right to run the upstream software.
+> IMPORTANT: This add-on wraps the official `visionect/visionect-server-v3:7.6.5` Docker image. Usage is subject to Visionect’s original license/terms. This repository only adds orchestration glue (database + redis + HA integration). 
 
 ## Installation
 
