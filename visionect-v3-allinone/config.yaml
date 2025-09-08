@@ -1,47 +1,44 @@
-name: Visionect Server v3 (All-in-One)
-version: "7.6.5-11"
+name: Visionect Server (All-in-One)
+version: 0.2.0
 slug: visionect_v3_allinone
-description: "Visionect Server v3 + PostgreSQL + Redis"
-url: "https://github.com/Adam7411/visionect-v3-allinone"
-
+description: Visionect Server + Postgres + Redis w jednym add-onie Home Assistant.
+url: https://github.com/Adam7411/visionect-v3-allinone
 arch:
-  - amd64
   - aarch64
   - armv7
-
 startup: services
 boot: auto
 init: false
+panel_icon: mdi:tablet-dashboard
+map:
+  - data:rw
+  - config:rw
+  - ssl:ro
 ingress: false
-
-panel_icon: mdi:tablet
-webui: "http://[HOST]:[PORT:8081]"
-watchdog: "http://[HOST]:[PORT:8081]"
-
+webui: http://[HOST]:[PORT:8081]
 ports:
-  "8081/tcp": 8081
-  "11113/tcp": 11113
+  8081/tcp: 8081
+  11113/tcp: 11113
 ports_description:
-  "8081/tcp": "Visionect Management UI"
-  "11113/tcp": "Visionect device port"
-
+  8081/tcp: Visionect Web UI
+  11113/tcp: Visionect Device Channel
+environment: {}
+schema:
+  db_password: password
+  server_address: str
+  enable_redis_persistence: bool?
+  visionect_debug: bool?
+  custom_http_port: int?
+options:
+  db_password: visionect
+  server_address: 192.168.1.50
+  enable_redis_persistence: false
+  visionect_debug: false
+  custom_http_port: 8081
+image: ghcr.io/adam7411/visionect-v3-allinone-{arch}
 privileged:
   - SYS_ADMIN
-apparmor: false
 devices:
-  - /dev/fuse
-
-schema:
-  postgres_user: str
-  postgres_password: str
-  postgres_db: str
-  visionect_server_address: str
-  timezone: str?
-  bind_address: str?
-options:
-  postgres_user: "visionect"
-  postgres_password: "visionect"
-  postgres_db: "koala"
-  visionect_server_address: "localhost"
-  timezone: "auto"
-  bind_address: "0.0.0.0"
+  - /dev/fuse:/dev/fuse:rwm
+full_access: false
+watchdog: http://[HOST]:[PORT:8081]/health
