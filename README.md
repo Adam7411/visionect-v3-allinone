@@ -37,7 +37,7 @@ Tested with a Joan 6 e‑paper device.
    * Port: `11113`
     ![image](https://github.com/user-attachments/assets/de30fd1e-9bd3-4f98-ab00-9a3b534f7332)
 5. Click connect. The tablet should appear in the Visionect server panel.
-
+<img width="1836" height="729" alt="pppp" src="https://github.com/user-attachments/assets/fa23b582-e5bd-4538-ab95-8d18f6948d04" />
 ---
 
 ## ✏️ Step 6: Create a Dashboard for Home Assistant
@@ -56,7 +56,6 @@ Tested with a Joan 6 e‑paper device.
 7. Test: `http://<HA_IP>:5050/joan1`
 8. Copy URL, paste into **Default URL** in Visionect dashboard settings.
 9. Adjust **Refresh Rate** if necessary (e.g., 2 seconds initially).
-<img width="1836" height="729" alt="pppp" src="https://github.com/user-attachments/assets/99c105dd-1761-4793-87b4-3a1fb6325251" />
 ---
 
 Integration with Home Assistant (Tablet status reading and URL sending)
