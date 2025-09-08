@@ -9,6 +9,9 @@ Tested with a Joan 6 e‑paper device.
 
 > IMPORTANT: This add-on wraps the official `visionect/visionect-server-v3:7.6.5` Docker image. Usage is subject to Visionect’s original license/terms. This repository only adds orchestration glue (database + redis + HA integration).
 
+<img width="1836" height="729" alt="pppp" src="https://github.com/user-attachments/assets/fa23b582-e5bd-4538-ab95-8d18f6948d04" />
+
+
 ## Installation
 
 1. Add this custom repository URL to Home Assistant Add-on Store.
