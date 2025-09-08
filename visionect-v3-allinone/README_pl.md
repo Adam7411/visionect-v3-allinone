@@ -71,7 +71,7 @@ Użyjemy dodatku **AppDaemon**.
 8.  Skopiuj ten adres URL.
 9.  Wróć do panelu **Visionect Software Suite**, przejdź do ustawień swojego tabletu i w polu **Default URL** wklej skopiowany adres dashboardu. Zapisz zmiany.
     ![image](https://github.com/user-attachments/assets/00558b5d-ad93-44ab-b4f0-ae8e9b1be20f)
-10. Po chwili na ekranie tabletu powinien pojawić się twój dashboard z Home Assistant. (jesli nie zmień częstotliwość odświeżania** (`Refresh rate`) tylko chwilowo na 2 sekundy aby załadowało nowy dashboard póżniej ustaw swoją wartość)
+10. Po chwili na ekranie tabletu powinien pojawić się twój dashboard z Home Assistant. 
 
 ### Dodatkowe porady
 *   Dla każdego tabletu możesz utworzyć osobny plik `.dash` i przypisać mu unikalny adres URL.
