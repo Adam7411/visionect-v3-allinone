@@ -12,25 +12,12 @@ arch:
 startup: services
 boot: auto
 init: false
+ingress: false
 
-# Ingress
-ingress: true
-ingress_port: 8081
-ingress_stream: true
 panel_icon: mdi:tablet
-panel_title: "Visionect Server"
-
-# (Opcjonalnie możesz zostawić webui/watchdog; nie są wymagane przy ingress)
 webui: "http://[HOST]:[PORT:8081]"
 watchdog: "http://[HOST]:[PORT:8081]"
 
-# Jeśli chcesz używać TYLKO ingress, możesz wyłączyć publikację portu 8081:
-# ports:
-#   "11113/tcp": 11113
-# ports_description:
-#   "11113/tcp": "Visionect device port"
-
-# Jeśli chcesz nadal mieć dostęp bezpośredni po porcie 8081, zostaw jak było:
 ports:
   "8081/tcp": 8081
   "11113/tcp": 11113
