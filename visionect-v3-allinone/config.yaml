@@ -12,9 +12,11 @@ arch:
 startup: services
 boot: auto
 init: false
-ingress: false
+ingress: true
+ingress_port: 8081
 
 panel_icon: mdi:tablet
+panel_title: "Visionect Server"
 webui: "http://[HOST]:[PORT:8081]"
 watchdog: "http://[HOST]:[PORT:8081]"
 
