@@ -36,12 +36,10 @@ Tested with a Joan 6 e‑paper device.
    * Server Home Assistant IP: e.g., `192.168.1.100` 
    * Port: `11113`
      
-   Visionect Configurator  
-   v2.0
+   Visionect Configurator v2.0
    ![image](https://github.com/user-attachments/assets/de30fd1e-9bd3-4f98-ab00-9a3b534f7332)
 
-    Visionect Configurator
-   v1.0
+    Visionect Configurator v1.0
    <img width="754" height="501" alt="Bez tytułu" src="https://github.com/user-attachments/assets/5b99deac-d54d-405b-8aef-70653a56dbc9" />
 
 6. Click connect. The tablet should appear in the Visionect server panel.
