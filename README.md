@@ -36,7 +36,7 @@ Tested with a Joan 6 e‑paper device.
    * Server Home Assistant IP: e.g., `192.168.1.100` 
    * Port: `11113`
      
-   Visionect Configurator v2.0
+    Visionect Configurator v2.0
    ![image](https://github.com/user-attachments/assets/de30fd1e-9bd3-4f98-ab00-9a3b534f7332)
 
     Visionect Configurator v1.0
