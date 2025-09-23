@@ -25,7 +25,7 @@ Tested with a Joan 6 e‑paper device.
    * Windows: [VisionectConfigurator.exe](https://files.visionect.com/VisionectConfigurator/VisionectConfigurator.exe)
    * Linux: [VisionectConfigurator\_linux.deb](https://files.visionect.com/VisionectConfigurator/VisionectConfigurator_linux.deb)
    * macOS: [Intel](https://files.visionect.com/VisionectConfigurator/VisionectConfigurator_intel.dmg) | [Apple Silicon](https://files.visionect.com/VisionectConfigurator/VisionectConfigurator_m1.dmg)
-   * Older version: [1.3.10](https://files.visionect.com/VisionectConfigurator2.exe) [VC_1.exe](https://files.visionect.com/VC_1.exe)
+   * Older version Windows:  [1.3.10](https://files.visionect.com/VisionectConfigurator2.exe) [VC_1.exe](https://files.visionect.com/VC_1.exe)
 
 2. Connect the tablet to USB.
 
