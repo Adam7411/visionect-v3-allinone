@@ -17,7 +17,7 @@ Przetestowano z tabletem Joan 6.
 
 ## Instalacja
 
-1. Dodaj URL repozytorium jako Custom Repository w Sklepie dodatków HA. (W HA wchodzimy w Ustawienia -> Dodatki -> Sklep z dodatkami -> menu z trzema kropeczkami u góry po prawej -> Repozytoria -> wklejemy https://github.com/Adam7411/visionect-v3-allinone w miejsce Dodaj -> +Dodaj
+1. Dodaj URL repozytorium jako Custom Repository w Sklepie dodatków HA. (Wchodzimy w Ustawienia -> Dodatki -> Sklep z dodatkami -> menu z trzema kropeczkami u góry po prawej -> Repozytoria -> wklejemy https://github.com/Adam7411/visionect-v3-allinone w miejsce Dodaj -> +Dodaj
 2. Wybierz „Visionect Server v3 (All-in-One)” → Zainstaluj.
 3. Uruchom dodatek.
 4. Otwórz UI: `http://<adres_HA>:8081` uruchomi się server Visionect Software Suite
