@@ -59,18 +59,14 @@ Tested with a Joan 6 e‑paper device.
 6. Restart AppDaemon.
 7. Test: `http://<HA_IP>:5050/joan1`
 8. Copy URL, paste into **Default URL** in Visionect dashboard settings.
-9. Adjust **Refresh Rate** if necessary (e.g., 2 seconds initially).
----
 
-Integration with Home Assistant (Tablet status reading and URL sending)
-Integration for reading information about the status of the Joan tablet in Home Assistant (e.g. battery level, connection status, etc.), as well as for sending your own URL ( e.g. https://www.wikipedia.org/ ) or local images ( example: http://HAaddress:8123/local/test_image.png
-P.S. The file test_image.png should be placed in the folder: \\192.168.xxx.xxx\config\www\
+
+
+Joan 6 integration with Home Assistant
 
 👉 [Visionect Joan](https://github.com/Adam7411/visionect_joan) 👈
 👉 [Visionect Joan](https://github.com/Adam7411/visionect_joan) 👈
 
-
-This allows for creating automations, such as sending low battery notifications, displaying an entity with battery level on the tablet, or sending images for different notifications, and then returning to the AppDaemon dashboard, etc.
 
 
 
