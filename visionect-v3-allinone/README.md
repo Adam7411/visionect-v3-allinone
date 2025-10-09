@@ -14,7 +14,7 @@ Tested with a Joan 6 e‑paper device.
 
 ## Installation
 
-1. Add this custom repository URL to Home Assistant Add-on Store.
+1. Add this custom repository URL to Home Assistant Add-on Store. (Go to Settings -> Add-ons -> Add-on store -> menu with three dots at the top right -> Repositories -> paste https://github.com/Adam7411/visionect-v3-allinone in place of Add -> +Add)
 2. Locate “Visionect Server v3 (All-in-One)” in the store.
 3. Click Install.
 4. Start the add-on.
