@@ -23,7 +23,6 @@ Przetestowano z tabletem Joan 6.
 2. Wybierz „Visionect Server v3 (All-in-One)” → Zainstaluj.
 3. Uruchom dodatek.
 4. Otwórz UI: `http://<adres_HA>:8081` uruchomi się server Visionect Software Suite
-5. Połącz Joan 6 z Visionect Software Suite 
 
 ## 📲 Krok 5: Konfiguracja tabletu Visionect
 
