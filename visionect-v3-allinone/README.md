@@ -19,7 +19,9 @@ Tested with a Joan 6 e‑paper device.
 3. Click Install.
 4. Start the add-on.
 5. Open Web UI (or navigate to `http://<HA_HOST>:8081`).
-## 📲 Step 5: Configure the Tablet
+6. Set a password for Visionect Software Suite, user admin
+   
+## 📲 Step 7: Configure the Tablet
 
 1. Download Visionect Configurator:
 
@@ -46,7 +48,7 @@ Tested with a Joan 6 e‑paper device.
 <img width="1836" height="729" alt="pppp" src="https://github.com/user-attachments/assets/fa23b582-e5bd-4538-ab95-8d18f6948d04" />
 ---
 
-## ✏️ Step 6: Create a Dashboard for Home Assistant
+## ✏️ Step 8: Create a Dashboard for Home Assistant
 
 > You can also use [Puppeteer version](https://github.com/Adam7411/Joan-6-Puppeteer/blob/main/README.md) if you don't want to use AppDaemon.
 
