@@ -25,7 +25,7 @@ Przetestowano z tabletem Joan 6.
 4. Otwórz UI: `http://<adres_HA>:8081` uruchomi się server Visionect Software Suite
 5. Ustaw hasło Visionect Software Suite użytkownik z automatu admin
 
-## 📲 Krok 5: Konfiguracja tabletu Visionect
+## 📲 Krok 6: Konfiguracja tabletu Visionect
 
 1.  Pobierz i uruchom aplikację **Visionect Configurator** na swoim komputerze:
     *   **Windows:** [VisionectConfigurator.exe](https://files.visionect.com/VisionectConfigurator/VisionectConfigurator.exe) lub [joan-configurator-2.1.3-windows.exe](https://configurator.getjoan.com/download/flavor/joan/latest/windows_64) 
@@ -56,7 +56,7 @@ _______________________________________________
 
 ---
 
-## ✏️ Krok 6: Tworzenie dashboardu w Home Assistant 
+## ✏️ Krok 7: Tworzenie dashboardu w Home Assistant 
 _______________________________________________________________________________
 
 Użyjemy dodatku **AppDaemon**.
