@@ -61,10 +61,10 @@ _______________________________________________________________________________
 
 Użyjemy dodatku **AppDaemon**.
 
-1.  Zainstaluj dodatek **AppDaemon** w Home Assistant (jeśli jeszcze go nie masz).
+1.  Zainstaluj dodatek **AppDaemon** w Home Assistant (jeśli jeszcze go nie masz). 
 2.  Przejdź do katalogu konfiguracyjnego AppDaemon, np. przez dodatek "Samba share" lub "File editor":  
     `\config\appdaemon\dashboards\` ( umnie to wygląda tak \\adres HA\addon_configs\a7c7b154_appdaemon\dashboards\ )
-3.  Utwórz w tym katalogu nowy plik z rozszerzeniem `.dash`, np. `joanl.dash`.
+3.  Utwórz w tym katalogu nowy plik z rozszerzeniem `.dash`, np. `joanl.dash`. [Użyj Joan 6 dashboard Generator](https://github.com/Adam7411/joan_generator/blob/main/README.md)
 4.  Możesz skorzystać z gotowych szablonów dashboardów z tego repozytorium:
     *   [joan1.dash](https://github.com/Adam7411/Joan-6-Visionect_Home-Assistant/blob/main/joan1.dash)
     *   [joan2.dash](https://github.com/Adam7411/Joan-6-Visionect_Home-Assistant/blob/main/joan2.dash)
