@@ -46,12 +46,16 @@ Tested with a Joan 6 e‑paper device.
 <img width="1836" height="729" alt="pppp" src="https://github.com/user-attachments/assets/fa23b582-e5bd-4538-ab95-8d18f6948d04" />
 ---
 
-## ✏️ Step 6: Create a Dashboard for Home Assistant 👉 [Joan 6 dashboard Generator](https://github.com/Adam7411/joan_generator/blob/main/README.md)
+## ✏️ Step 6: Create a Dashboard for Home Assistant 
+
+👉👉👉[Joan 6 dashboard Generator](https://github.com/Adam7411/joan_generator/blob/main/README.md)
 
 1. Install **AppDaemon** in Home Assistant.
 2. Go to: `\HA_IP\config\appdaemon\dashboards\` \addon_configs\a7c7b154_appdaemon\dashboards\ )
+ 👉👉👉[Joan 6 dashboard Generator](https://github.com/Adam7411/joan_generator/blob/main/README.md)
 3. Create a file, e.g., `joan1.dash`
 4. Example files:
+
 
    * [joan1.dash](https://github.com/Adam7411/Joan-6-Visionect_Home-Assistant/blob/main/joan1.dash)
    * [joan2.dash](https://github.com/Adam7411/Joan-6-Visionect_Home-Assistant/blob/main/joan2.dash)
