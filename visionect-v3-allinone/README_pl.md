@@ -1,3 +1,10 @@
+***
+- [Visionect Software Suite instalacja Proxmox](https://github.com/Adam7411/Joan-6-Visionect_Home-Assistant)
+- [Dodatek Visionect Joan dla Home Assistant](https://github.com/Adam7411/visionect_joan/blob/main/README_pl.md)
+- [Dodatek Joan 6: AppDaemon Dashboard Generator](https://github.com/Adam7411/joan_generator/)
+- [Chcesz kupić nowy Joan 6?](https://allegrolokalnie.pl/oferta/joan-6-nowy-home-assistant-energooszczedny-dotykowy-tablet-eink)
+***
+
 [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FAdam7411%2Fvisionect-v3-allinone)
 
 <!-- README.md -->
