@@ -1,8 +1,14 @@
+***
+- [Visionect Software Suite - Installation in Proxmox](https://github.com/Adam7411/Joan-6-Visionect_Home-Assistant_EN)
+- [Visionect Joan for Home Assistant add-on](https://github.com/Adam7411/visionect_joan)
+- [Joan 6: AppDaemon Dashboard Generator add-on](https://github.com/Adam7411/joan_generator/blob/main/README_EN.md)
+***
+
 [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FAdam7411%2Fvisionect-v3-allinone)
 
 [Polska wersja dokumentacji (README_pl.md)](https://github.com/Adam7411/visionect-v3-allinone/blob/main/visionect-v3-allinone/README_pl.md)
 
-# Visionect Server v3 (All‑in‑One) Home Assistant Add-on
+# Visionect Server v3 (All‑in‑One) installation in Home Assistant
 
 All‑in‑one packaged Visionect Server v3 stack (Visionect upstream image + embedded PostgreSQL + Redis) for Home Assistant Supervisor.  
 Tested with a Joan 6 e‑paper device.
