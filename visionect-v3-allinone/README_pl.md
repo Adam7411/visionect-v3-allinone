@@ -12,7 +12,7 @@
 <a href="README.md">English</a> | <a href="README_pl.md">Polski</a>
 </div>
 
-# Visionect Server v3 (All‑in‑One) – Dodatek Home Assistant
+# Visionect Server v3 (All‑in‑One) – Instalacja w Home Assistant
 
 Visionect Server v3 (oficjalny obraz) + PostgreSQL + Redis w jednym kontenerze dodatku Home Assistant.  
 Przetestowano z tabletem Joan 6.
