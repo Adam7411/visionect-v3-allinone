@@ -1,7 +1,7 @@
 ***
 - [Visionect Software Suite - Installation in Proxmox](https://github.com/Adam7411/Joan-6-Visionect_Home-Assistant_EN)
 - [Visionect Joan for Home Assistant add-on](https://github.com/Adam7411/visionect_joan)
-- [Joan 6: AppDaemon Dashboard Generator add-on](https://github.com/Adam7411/joan_generator/blob/main/README_EN.md)
+- [Joan 6/13PRO: AppDaemon Dashboard Generator add-on](https://github.com/Adam7411/joan_generator/blob/main/README_EN.md)
 ***
 
 
@@ -11,7 +11,7 @@
 # Visionect Server v3 (All‑in‑One) installation in Home Assistant
 
 All‑in‑one packaged Visionect Server v3 stack (Visionect upstream image + embedded PostgreSQL + Redis) for Home Assistant Supervisor.  
-Tested with a Joan 6 e‑paper device.
+Tested with a Joan 6/13PRO e‑paper device.
 
 > IMPORTANT: This add-on wraps the official `visionect/visionect-server-v3:7.6.5` Docker image. Usage is subject to Visionect’s original license/terms. This repository only adds orchestration glue (database + redis + HA integration). 
 
@@ -54,12 +54,12 @@ Tested with a Joan 6 e‑paper device.
 
 ## ✏️ Step 6: Create a Dashboard for Home Assistant 
 
-👉👉👉[Joan 6 dashboard Generator](https://github.com/Adam7411/joan_generator/blob/main/README.md)
+👉👉👉[Joan 6/13PRO dashboard Generator](https://github.com/Adam7411/joan_generator/blob/main/README.md)
 
 1. Install **AppDaemon** in Home Assistant.
 2. Go to: `\HA_IP\config\appdaemon\dashboards\` \addon_configs\a7c7b154_appdaemon\dashboards\ 
  
- 👉👉👉[Joan 6 dashboard Generator](https://github.com/Adam7411/joan_generator/blob/main/README.md)
+ 👉👉👉[Joan 6/13PRO dashboard Generator](https://github.com/Adam7411/joan_generator/blob/main/README.md)
 
 3. Create a file, e.g., `joan1.dash`
 4. Example files:
@@ -74,7 +74,7 @@ Tested with a Joan 6 e‑paper device.
 
 
 
-Joan 6 integration with Home Assistant
+Joan 6/13PRO integration with Home Assistant
 
 👉 [Visionect Joan](https://github.com/Adam7411/visionect_joan) 👈
 👉 [Visionect Joan](https://github.com/Adam7411/visionect_joan) 👈
